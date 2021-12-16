@@ -7,7 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.id.egiwibowo.todoapps.data.Todo
 
-class TodoAdapter(private val todos: List<Todo>) :
+interface onClickListener {
+    fun onClickItem(todo: Todo)
+}
+
+class TodoAdapter(private val todos: List<Todo>, private val listener: onClickListener) :
     RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
 
     /**
@@ -36,6 +40,9 @@ class TodoAdapter(private val todos: List<Todo>) :
         // contents of the view with that element
         viewHolder.tvTitle.text = todos[position].title
         viewHolder.tvDescription.text = todos[position].descriptions
+        viewHolder.itemView.setOnClickListener {
+            listener.onClickItem(todos[position])
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)

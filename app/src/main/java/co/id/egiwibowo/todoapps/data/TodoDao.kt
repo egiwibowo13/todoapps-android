@@ -1,9 +1,6 @@
 package co.id.egiwibowo.todoapps.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface TodoDao {
@@ -15,6 +12,9 @@ interface TodoDao {
 
     @Insert
     fun insertAll(vararg todos: Todo)
+
+    @Update
+    fun update(todo: Todo)
 
     @Delete
     fun delete(todo: Todo)

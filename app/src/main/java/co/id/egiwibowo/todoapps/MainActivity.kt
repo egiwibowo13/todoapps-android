@@ -11,7 +11,7 @@ import androidx.room.Room
 import co.id.egiwibowo.todoapps.data.AppDatabase
 import co.id.egiwibowo.todoapps.data.Todo
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), onClickListener {
 
 
     private lateinit var db: AppDatabase
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         val todoDao = db.todoDao()
         val todos: List<Todo> = todoDao.getAll()
 
-        todoAdapter = TodoAdapter(todos)
+        todoAdapter = TodoAdapter(todos, this)
 
         rvTodos.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         val todoDao = db.todoDao()
         val todos: List<Todo> = todoDao.getAll()
 
-        todoAdapter = TodoAdapter(todos)
+        todoAdapter = TodoAdapter(todos, this)
 
         rvTodos.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -69,5 +69,13 @@ class MainActivity : AppCompatActivity() {
         todos.add(Todo(1,"title todo 1", "description 1"))
         todos.add(Todo(2,"title todo 2", "description 2"))
         return todos
+    }
+
+    override fun onClickItem(todo: Todo) {
+        val intent = Intent(this, CreateTodoActivity::class.java)
+        intent.apply {
+            putExtra("todo", todo)
+        }
+        startActivity(intent)
     }
 }

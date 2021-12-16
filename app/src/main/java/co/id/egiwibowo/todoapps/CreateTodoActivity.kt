@@ -2,13 +2,16 @@ package co.id.egiwibowo.todoapps
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import co.id.egiwibowo.todoapps.data.AppDatabase
 import co.id.egiwibowo.todoapps.data.Todo
 
 class CreateTodoActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_todo)
@@ -26,11 +29,26 @@ class CreateTodoActivity : AppCompatActivity() {
 
         val todoDao = db.todoDao()
 
+        val todo = intent.getParcelableExtra<Todo>("todo")
+        if (todo != null) {
+            etTitle.setText(todo.title)
+            etDescription.setText(todo.descriptions)
+        }
+
         btnSave.setOnClickListener {
-            todoDao.insertAll(Todo(
-                title = etTitle.text.toString(),
-                descriptions = etDescription.text.toString()
-            ))
+
+            if (todo != null) {
+                todoDao.update(Todo(
+                    id = todo.id,
+                    title = etTitle.text.toString(),
+                    descriptions = etDescription.text.toString()
+                ))
+            } else {
+                todoDao.insertAll(Todo(
+                    title = etTitle.text.toString(),
+                    descriptions = etDescription.text.toString()
+                ))
+            }
             finish()
         }
     }

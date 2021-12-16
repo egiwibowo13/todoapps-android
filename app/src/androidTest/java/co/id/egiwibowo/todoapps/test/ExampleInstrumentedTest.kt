@@ -1,4 +1,4 @@
-package co.id.egiwibowo.todoapps
+package co.id.egiwibowo.todoapps.test
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

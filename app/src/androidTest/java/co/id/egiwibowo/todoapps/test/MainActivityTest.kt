@@ -1,4 +1,4 @@
-package co.id.egiwibowo.todoapps
+package co.id.egiwibowo.todoapps.test
 
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
@@ -7,6 +7,8 @@ import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import co.id.egiwibowo.todoapps.MainActivity
+import co.id.egiwibowo.todoapps.R
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
